@@ -1,0 +1,6 @@
+**/target/
+**/node_modules/
+**/.angular/
+**/.vscode/
+*.exe
+*.ps1
