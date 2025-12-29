@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-premium sticky-top mb-5">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <i class="fas fa-university me-2"></i>
+      <span>EGA BANK</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <span class="nav-link text-white-50 px-3 small">
+            <i class="fas fa-user-circle me-1"></i> {{ authService.getUsername() }}
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3 d-flex align-items-center" routerLink="/home" routerLinkActive="active">
+            <i class="fas fa-home me-2"></i> Accueil
+          </a>
+        </li>
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <li class="nav-item" *ngIf="authService.isAdmin()">
+            <a class="nav-link px-3 d-flex align-items-center" routerLink="/clients" routerLinkActive="active">
+              <i class="fas fa-users-cog me-2"></i> Gestion Clients
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3 d-flex align-items-center" routerLink="/accounts" routerLinkActive="active">
+              <i class="fas fa-wallet me-2"></i> {{ authService.isAdmin() ? 'Tous les Comptes' : 'Mes Comptes' }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3 d-flex align-items-center" routerLink="/transactions" routerLinkActive="active">
+              <i class="fas fa-history me-2"></i> {{ authService.isAdmin() ? 'Historique Global' : 'Transactions' }}
+            </a>
+          </li>
+          <li class="nav-item ms-lg-3">
+            <button (click)="logout()" class="btn btn-outline-light btn-sm px-3 rounded-pill d-flex align-items-center">
+              <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+            </button>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!authService.isLoggedIn()">
+          <li class="nav-item">
+            <a class="nav-link px-3 d-flex align-items-center" routerLink="/login" routerLinkActive="active">
+              <i class="fas fa-sign-in-alt me-2"></i> Connexion
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link px-3 btn btn-primary text-white rounded-pill d-flex align-items-center"
+              routerLink="/register">
+              <i class="fas fa-user-plus me-2"></i> S'inscrire
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="animate-fade-in">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<footer class="mt-auto py-5 text-center text-muted border-top bg-white">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center mb-3">
+      <i class="fas fa-university me-2"></i>
+      <span class="fw-bold text-dark">EGA BANK</span>
+    </div>
+    <p class="small mb-0">&copy; 2025 Système de Gestion Bancaire EGA. Tous droits réservés.</p>
+    <div class="mt-2">
+      <a href="#" class="text-muted text-decoration-none small me-3">Conditions d'utilisation</a>
+      <a href="#" class="text-muted text-decoration-none small">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>

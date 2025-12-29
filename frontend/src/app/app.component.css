@@ -1,0 +1,11 @@
+/* Page animations */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.active {
+    font-weight: 600;
+    color: var(--secondary) !important;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
